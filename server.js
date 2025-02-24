@@ -6,9 +6,10 @@ var alphabet = '123456789ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 var nanoid = customAlphabet(alphabet, 10);
 
 var foodData = require('./food-log.json')
+var config = require('./config.json')
 
 var app = express()
-var port = process.env.PORT || 3005
+var port = process.env.PORT || config.port
 
 app.use(express.json())
 
@@ -70,11 +71,59 @@ app.post('/foodlog', function(req, res, next){
 // Edit a single food log item
 app.put('/foodlog/:log', function(req, res, next){
 
+    //check if request formulated correctly
+    if (req.body && req.body.foodDate && req.body.foodItem && req.body.portionSize && req.body.calories && req.body.mealType) {
+
+        //check if the log corrosponding to the given id exists
+        var log = foodData[req.params.log]
+        if(log){
+
+            //replace the contents of the log with the request
+            log.foodDate = req.body.foodDate
+            log.foodItem = req.body.foodItem
+            log.portionSize = req.body.portionSize
+            log.calories = req.body.calories
+            log.mealType = req.body.mealType
+
+            //write data to file
+            fs.writeFile(__dirname + "/food-log.json",
+                JSON.stringify(foodData, null, 2),
+                function(err, result){
+                    if(!err){ //if no error, send good status
+                        res.status(200).send("Success")
+                    } else {
+                        res.status(500).send("Server error")
+                    }
+                }
+            )
+        } else {
+            res.status(400).send("That log does not exist.")
+        }
+    } else {
+        res.status(400).send("Request body is not in the correct format.")
+    }
 })
 
 // Delete a food log item
 app.delete('/foodlog/:log', function(req, res, next){
-    
+    var log = foodData[req.params.log]
+    if(log){
+        delete foodData[req.params.log]
+
+        //write data to file
+        fs.writeFile(__dirname + "/food-log.json",
+            JSON.stringify(foodData, null, 2),
+            function(err, result){
+                if(!err){ //if no error, send good status
+                    res.status(200).send("Success")
+                } else {
+                    res.status(500).send("Server error")
+                }
+            }
+        )
+    } else {
+        res.status(400).send("That log does not exist.")
+    }
 })
 
 app.listen(port, function () {

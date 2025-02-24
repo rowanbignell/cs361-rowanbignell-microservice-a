@@ -6,13 +6,6 @@
     "calories": 90,
     "mealType": "Snack"
   },
-  "54321": {
-    "foodDate": "2003-02-08",
-    "foodItem": "Cake",
-    "portionSize": "3 large",
-    "calories": 500,
-    "mealType": "Dessert"
-  },
   "00000": {
     "foodDate": "1999-10-10",
     "foodItem": "Cereal",
