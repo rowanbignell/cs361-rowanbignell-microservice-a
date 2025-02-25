@@ -138,6 +138,7 @@ Returns `400` status with message `Request body is not in the correct format.` w
 Returns `500` status with message `Server error` if the microservice fails to save the updated data to file.
 
 ## UML Diagram
+![image](https://github.com/user-attachments/assets/e7b09903-e00f-42c7-beb3-723e0975f932)
 
 ## Example Data
 
