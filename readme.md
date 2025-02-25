@@ -7,8 +7,28 @@ All request bodies expect JSON.
 ### Get all Items
 Send an `GET` request to `{{address}}/foodLog`.
 
+Example Request:
+```
+    fetch(`http://localhost:3005/foodLog`, {
+        method: "GET",
+        headers: {  
+        "Content-Type": "application/json"
+        }
+    })
+```
+
 ### Get One Item
 Send a `GET` request to `{{address}}/foodlog/{{id}}` where `id` is the id of the food log item to request.
+
+Example Request:
+```
+    fetch(`http://localhost:3005/foodLog/00000`, {
+        method: "GET",
+        headers: {  
+        "Content-Type": "application/json"
+        }
+    })
+```
 
 ### Add an Item
 Send a `POST` request to `{{address}}/foodlog` with a body containing:
@@ -21,8 +41,29 @@ Send a `POST` request to `{{address}}/foodlog` with a body containing:
 	"mealType": {{mealType}}
 }
 ```
+
+Example Request:
+```
+    fetch(`http://localhost:3005/foodlog`, {
+        method: "POST",
+        body: addBody,
+        headers: {  
+        "Content-Type": "application/json"
+        }
+    })
+```
 ### Delete an Item
 Send a `DELETE` request to `{{address}}/foodlog/{{id}}` where `id` is the id of the food log item.
+
+Example Request:
+```
+    fetch(`http://localhost:3005/foodlog/00000`, {
+        method: "DELETE",
+        headers: {  
+        "Content-Type": "application/json"
+        }
+    })
+```
 
 ### Edit an Item
 Send a `PUT` request to `{{address}}/foodlog/{{id}}` where `id` is the id of the food log item, with a body containing:
@@ -34,6 +75,17 @@ Send a `PUT` request to `{{address}}/foodlog/{{id}}` where `id` is the id of the
 	"calories": {{calories}},
 	"mealType": {{mealType}}
 }
+```
+
+Example Request:
+```
+    fetch(`http://localhost:3005/foodlog/12345`, {
+        method: "PUT",
+        body: editBody,
+        headers: {  
+        "Content-Type": "application/json"
+        }
+    })
 ```
 ## How to Recieve
 
@@ -69,3 +121,5 @@ Send a `PUT` request to `{{address}}/foodlog/{{id}}` where `id` is the id of the
   }
 }
 ```
+## Config File
+The file `config.json` stores the port that the server runs off of, and can be changed from the file.
