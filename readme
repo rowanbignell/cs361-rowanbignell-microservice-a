@@ -1,4 +1,14 @@
-{
+# Microservice A : Food Log
+
+## How to Request
+
+## How to Recieve
+
+## UML Diagram
+
+## Example Data
+
+```{
   "12345": {
     "foodDate": "2025-02-08",
     "foodItem": "Apple",
@@ -14,3 +24,4 @@
     "mealType": "Breakfast"
   }
 }
+```
