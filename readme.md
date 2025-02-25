@@ -88,16 +88,54 @@ Example Request:
     })
 ```
 ## How to Recieve
+Data in JSON will be returned as responses when applicable to the corrosponding requests.
 
 ### Get all Items
+Returns `200` status with data when OK. Example handling of data:
+```
+{{{fetch}}}.then(response => {
+        return response.json()
+    })
+    .then(data => {
+        console.log(data)
+    })
+```
 
 ### Get One Item
+Returns `200` status with data when OK. Example handling of data:
+```
+{{{fetch}}}.then(response => {
+        return response.json()
+    })
+    .then(data => {
+        console.log(data)
+    })
+```
+
+Returns `400` status with message `Log item not found.` when the id does not match the data.
 
 ### Add an Item
+Returns `200` status with message `Success` when adding the items was successful.
+
+Returns `400` status with message `Request body is not in the correct format.` when the request body is missing or is missing an attribute.
+
+Returns `500` status with message `Server error` if the microservice fails to save the updated data to file.
 
 ### Delete an Item
+Returns `200` status with message `Success` when deleting the item was successful.
+
+Returns `400` status with message `That log does not exist.` when the id does not match the data.
+
+Returns `500` status with message `Server error` if the microservice fails to save the updated data to file.
 
 ### Edit an Item
+Returns `200` status with message `Success` when editing the item was successful.
+
+Returns `400` status with message `That log does not exist.` when the id does not match the data.
+
+Returns `400` status with message `Request body is not in the correct format.` when the request body is missing or is missing an attribute.
+
+Returns `500` status with message `Server error` if the microservice fails to save the updated data to file.
 
 ## UML Diagram
 
