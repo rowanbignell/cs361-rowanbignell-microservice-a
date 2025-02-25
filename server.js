@@ -14,23 +14,22 @@ var port = process.env.PORT || config.port
 app.use(express.json())
 
 // Retrieve all food log information
-app.get('/foodlog', function(req, res, next){
+app.get('/foodlog', function(req, res){
     res.status(200).json(foodData)
-})
+});
 
 // Retrieve a single food log item
-app.get('/foodlog/:log', function(req, res, next){
+app.get('/foodlog/:log', function(req, res){
     var log = foodData[req.params.log]
     if(log){
         res.status(200).json(log)
     } else {
         res.status(400).send("Log item not found.")
     }
-})
+});
 
 // Add a single food log item
-app.post('/foodlog', function(req, res, next){
-    console.log("== req.body: ", req.body)
+app.post('/foodlog', function(req, res){
     //check all request fields exist
     if (req.body && req.body.foodDate && req.body.foodItem && req.body.portionSize && req.body.calories && req.body.mealType){
         // generate ID
@@ -69,7 +68,7 @@ app.post('/foodlog', function(req, res, next){
 })
 
 // Edit a single food log item
-app.put('/foodlog/:log', function(req, res, next){
+app.put('/foodlog/:log', function(req, res){
 
     //check if request formulated correctly
     if (req.body && req.body.foodDate && req.body.foodItem && req.body.portionSize && req.body.calories && req.body.mealType) {
@@ -105,7 +104,7 @@ app.put('/foodlog/:log', function(req, res, next){
 })
 
 // Delete a food log item
-app.delete('/foodlog/:log', function(req, res, next){
+app.delete('/foodlog/:log', function(req, res){
     var log = foodData[req.params.log]
     if(log){
         delete foodData[req.params.log]
@@ -125,6 +124,7 @@ app.delete('/foodlog/:log', function(req, res, next){
         res.status(400).send("That log does not exist.")
     }
 })
+
 
 app.listen(port, function () {
     console.log("== Server listening on port", port)
